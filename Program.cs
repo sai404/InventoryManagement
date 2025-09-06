@@ -2,6 +2,7 @@ using Backend.API.Data;
 using Backend.API.Repository.Implementation;
 using Backend.API.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +23,12 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DBBackendConnectionString"));
-});
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//builder.Services.AddDbContext<ApplicationDBContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DBBackendConnectionString"));
+//});
 builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
 builder.Services.AddScoped<IItemsRepository,ItemRepository>();
 builder.Services.AddScoped<ITelegramBot,TelegramBot>();
