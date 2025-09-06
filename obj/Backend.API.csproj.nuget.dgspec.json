@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\EDU_UI_March_25\\Learning\\Shree Balaji\\API\\Backend.API\\Backend.API\\Backend.API.csproj": {}
+    "G:\\Deploy Builds\\api push to repo\\InventoryManagement\\Backend.API.csproj": {}
   },
   "projects": {
-    "G:\\EDU_UI_March_25\\Learning\\Shree Balaji\\API\\Backend.API\\Backend.API\\Backend.API.csproj": {
+    "G:\\Deploy Builds\\api push to repo\\InventoryManagement\\Backend.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\EDU_UI_March_25\\Learning\\Shree Balaji\\API\\Backend.API\\Backend.API\\Backend.API.csproj",
+        "projectUniqueName": "G:\\Deploy Builds\\api push to repo\\InventoryManagement\\Backend.API.csproj",
         "projectName": "Backend.API",
-        "projectPath": "G:\\EDU_UI_March_25\\Learning\\Shree Balaji\\API\\Backend.API\\Backend.API\\Backend.API.csproj",
+        "projectPath": "G:\\Deploy Builds\\api push to repo\\InventoryManagement\\Backend.API.csproj",
         "packagesPath": "C:\\Users\\Sai\\.nuget\\packages\\",
-        "outputPath": "G:\\EDU_UI_March_25\\Learning\\Shree Balaji\\API\\Backend.API\\Backend.API\\obj\\",
+        "outputPath": "G:\\Deploy Builds\\api push to repo\\InventoryManagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

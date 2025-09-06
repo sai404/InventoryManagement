@@ -11,34 +11,42 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(5000);
 });
-// Add services to the container.
 
+// Add services to the container
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.WriteIndented = true;
     });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// PostgreSQL DbContext
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//builder.Services.AddDbContext<ApplicationDBContext>(options =>
-//{
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("DBBackendConnectionString"));
-//});
-builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
-builder.Services.AddScoped<IItemsRepository,ItemRepository>();
-builder.Services.AddScoped<ITelegramBot,TelegramBot>();
+// Repositories
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IItemsRepository, ItemRepository>();
+builder.Services.AddScoped<ITelegramBot, TelegramBot>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// **Enable Swagger in all environments (Production + Development)**
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Inventory API V1");
+});
+
+// **Auto migrate database on startup**
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
+    db.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
